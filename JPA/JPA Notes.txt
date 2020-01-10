@@ -1,0 +1,48 @@
+-> DAO can be implemented by :
+	- ORM - Object Relational Mapping (Ex. Hibernate, OpenJPA)
+	- JDBC
+
+- JPA 	- specification - standard interfaces are provided by java
+	- provides interfaces for DAO
+	- Hibernate is implementation of JPA
+	- Some implementations of JPA include - Eclipse link, Hibernate, Top Link, OpenJPA
+
+-> ORM	- helps in mapping user data with database
+	- when connecting application using jdbc, then:
+		1) the driver has to be loaded
+		2) establish the connection
+		3) create a statement
+		4) execute the statement
+		5) store the data in a resultset
+		6) process the resultset
+		7) show the data to end user
+	- boilerplate code (steps repeated everytime in jdbc)
+	- it can be omitted usigng ORM
+	- can be done in 2 ways - XML
+				- annotations
+	- @Entity required on top of bean class (Persistence Class)
+		- will search for the same name of bean class in db
+		- will map the fields in the class with the column names in the db
+	- @Table(name="Student") - used to annotate class with database table name
+	- @Id - will refer same name in column and assign with primary key
+
+	- JPA contains a persistence.xml file that acts as a config file for JPA application
+	- persistence.xml should be present in META-INF folder
+	- META-INF should be present in a folder that is in build path
+
+- Persistence.createEntityManagerFactory(persistenceUnitName [in persistenc.xml]) - returns instance of "EntityManagerFactory"
+  (class)	(static method)
+- EntityManager entityManager=factory.createEntityManager(); - gives entity manager, responsible for managing life cycle of the object
+
+-> Persistence ------> EntityManagerFactory -------> EntityManager -----> EntityObject
+				|						|
+			     StudentDB-------------------------------------------
+manages life cycle of object
+-> EntityManager connects to database using EntityManagerInstance
+
+- entityManager.persist(student); - save in a database
+
+- <property name="hibernate.show_sql" value="true" />	- show sql query in console everytime its executed
+- entityManager.find(Student.class,student.getRollNumber());
+		    (type of object) (primary key)
+
